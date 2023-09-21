@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "pythontasks"
+version = "0.1.0"
+description = ""
+authors = ["boo <booblegum42@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4.2"
+
+
+[tool.poetry.group.develop.dependencies]
+ipython = "^8.15.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
