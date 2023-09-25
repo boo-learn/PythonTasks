@@ -1,8 +1,19 @@
+import pytest
 from solutions.luna_algo import luna_algo
 
 
-def test_luna_algo_valid():
-    assert luna_algo(8888888888888888) == 'Да'
+@pytest.mark.parametrize("card_number", [8888888888888888,
+                                         6233720003430773,
+                                         5105105105105100,
+                                         4012888888881881
+                                         ])
+def test_luna_algo_valid(card_number):
+    assert luna_algo(card_number)
 
-def test_luna_algo_invalid():
-    assert luna_algo(2723000048400011) == 'Нет'
+
+@pytest.mark.parametrize("card_number", [2723000048400011,
+                                         5000000000000009,
+                                         4652060573334999,
+                                         ])
+def test_luna_algo_invalid(card_number):
+    assert not luna_algo(card_number)
