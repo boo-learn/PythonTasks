@@ -11,9 +11,9 @@ def test_luna_algo_valid(card_number):
     assert luna_algo(card_number)
 
 
-@pytest.mark.parametrize("card_number", [2723000048400011,
-                                         5000000000000009,
-                                         4652060573334999,
+@pytest.mark.parametrize("card_number", [7223000048400011,
+                                         5000000000000001,
+                                         4652060573334991,
                                          ])
 def test_luna_algo_invalid(card_number):
     assert not luna_algo(card_number)
