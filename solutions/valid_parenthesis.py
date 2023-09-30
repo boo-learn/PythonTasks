@@ -11,9 +11,7 @@ def isValid(self, s: str) -> bool:
             continue
 
         if bracket in bracket_matches.values():
-            if not opened_brackets:
-                return False
-            if not bracket_matches[opened_brackets[-1]] == bracket:
+            if not opened_brackets or not bracket_matches[opened_brackets[-1]] == bracket:
                 return False
             opened_brackets.pop()
 
