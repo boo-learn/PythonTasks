@@ -1,25 +1,15 @@
 def isIsomorphic(s: str, t: str) -> bool:
 
-    def letter_sequence(string: str) -> list:
-        comparison = []
-        prev_letter = ''
-        for letter in string:
-            if prev_letter:
-                if letter is not prev_letter:
-                    comparison.append(0)
-                else:
-                    comparison.append(1)
-            prev_letter = letter
-        return comparison
+    def check_pattern(first_str: str, second_str: str) -> bool:
+        letters_map = {}
+        for letter_s, letter_t in zip(first_str, second_str):
+            if letter_s not in letters_map:
+                letters_map[letter_s] = letter_t
+            if not letters_map[letter_s] == letter_t:
+                return False
+        return True
 
-    for letter_1, letter_2 in zip(s, t):
-        if letter_1 == letter_2:
-            return False
-
-    sequence_s = letter_sequence(s)
-    sequence_t = letter_sequence(t)
-
-    if not sequence_t == sequence_s:
+    if not check_pattern(s, t) or not check_pattern(t, s):
         return False
     return True
 
