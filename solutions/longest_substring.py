@@ -1,15 +1,19 @@
 def lengthOfLongestSubstring(s: str) -> int:
+
     substring: str = ''
-    substrings: list = []
+    longest_substring = 0
+    i = 0
 
-    for letter in s:
-        if letter in substring:
-            substrings.append(substring)
-            substring = letter
-        elif letter not in substring:
-            substring += letter
+    while i < len(s):
+        for letter in s[i:]:
+            if letter in substring:
+                if longest_substring < len(substring):
+                    longest_substring = len(substring)
+                substring = ''
+            else:
+                substring += letter
+        i += 1
 
-    substrings.append(substring)
-    longest_substring = max(substrings, key=len)
+    return longest_substring
 
-    return len(longest_substring)
+print(lengthOfLongestSubstring("abcabcbb"))
