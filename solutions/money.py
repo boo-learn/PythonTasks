@@ -21,19 +21,10 @@ class Money:
         cents = self.__cents + other.__cents
         return Money(rub, cents)
 
-    def __mul__(self, other):
+    def __mul__(self, num):
         self_all_money = self.__rub + (self.__cents / 100)
-        other_all_money = other.__rub + (other.__cents / 100)
-        money_multiply = self_all_money * other_all_money
+        money_multiply = self_all_money * num
         cent, rub = math.modf(money_multiply)
         rub = int(rub)
         cent = int(round(cent, 2) * 100)
         return Money(rub, cent)
-
-# Создаем две денежные суммы
-money_sum1 = Money(20, 60)
-money_sum2 = Money(10, 45)
-
-# Складываем суммы
-money_result = money_sum1 * money_sum2
-print(money_result)  # 31руб 5коп
