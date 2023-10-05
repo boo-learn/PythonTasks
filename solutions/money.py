@@ -21,6 +21,15 @@ class Money:
         cents = self.__cents + other.__cents
         return Money(rub, cents)
 
+    def __sub__(self, other):
+        all_money = (self.__rub + (self.__cents / 100)) - (other.__rub + (other.__cents / 100))
+        if all_money < 0:
+            return Money(0, 0)
+        cent, rub = math.modf(all_money)
+        rub = int(rub)
+        cent = int(round(cent, 2) * 100)
+        return Money(rub, cent)
+
     def __mul__(self, num):
         self_all_money = self.__rub + (self.__cents / 100)
         money_multiply = self_all_money * num

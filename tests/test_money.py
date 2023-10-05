@@ -42,6 +42,23 @@ def test_add_money(first_money, second_money, expected):
     assert out.getvalue().strip() == expected
 
 @pytest.mark.parametrize(
+    'first_money,second_money,expected',
+    [
+        (Money(10, 45), Money(10, 55), '0руб 0коп'),
+        (Money(10, 101), Money(1, 200), '8руб 1коп'),
+        (Money(0, 205), Money(0, 0), '2руб 5коп'),
+        (Money(0, 0), Money(0, 205), '0руб 0коп'),
+    ]
+)
+def test_substract_money(first_money, second_money, expected):
+    substraction_res = first_money - second_money
+    assert isinstance(substraction_res, Money)
+    out = StringIO()
+    sys.stdout = out
+    print(substraction_res)
+    assert out.getvalue().strip() == expected
+
+@pytest.mark.parametrize(
     'first_money,num,expected',
     [
         (Money(10, 45), 3, '31руб 35коп'),
