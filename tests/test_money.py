@@ -74,3 +74,55 @@ def test_mul_money(first_money, num, expected):
     sys.stdout = out
     print(mul)
     assert out.getvalue().strip() == expected
+
+@pytest.mark.parametrize(
+    'first_money,second_money,expected',
+    [
+        (Money(10, 45), Money(10, 55), False),
+        (Money(10, 101), Money(1, 200), True),
+        (Money(0, 205), Money(0, 0), True),
+        (Money(0, 0), Money(0, 205), False),
+    ]
+)
+def test_gt_money(first_money, second_money, expected):
+    result = first_money > second_money
+    assert result == expected
+
+@pytest.mark.parametrize(
+    'first_money,second_money,expected',
+    [
+        (Money(10, 45), Money(10, 55), True),
+        (Money(10, 101), Money(1, 200), False),
+        (Money(0, 205), Money(0, 0), False),
+        (Money(0, 0), Money(0, 205), True),
+    ]
+)
+def test_lt_money(first_money, second_money, expected):
+    result = first_money < second_money
+    assert result == expected
+
+@pytest.mark.parametrize(
+    'first_money,second_money,expected',
+    [
+        (Money(10, 45), Money(10, 55), False),
+        (Money(10, 101), Money(0, 1101), True),
+        (Money(0, 205), Money(2, 5), True),
+        (Money(0, 0), Money(0, 205), False),
+    ]
+)
+def test_eq_money(first_money, second_money, expected):
+    result = first_money == second_money
+    assert result == expected
+
+@pytest.mark.parametrize(
+    'first_money,second_money,expected',
+    [
+        (Money(10, 45), Money(10, 55), True),
+        (Money(10, 101), Money(0, 1101), False),
+        (Money(0, 205), Money(2, 5), False),
+        (Money(0, 0), Money(0, 205), True),
+    ]
+)
+def test_ne_money(first_money, second_money, expected):
+    result = first_money != second_money
+    assert result == expected

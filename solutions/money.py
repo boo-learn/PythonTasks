@@ -37,3 +37,24 @@ class Money:
         rub = int(rub)
         cent = int(round(cent, 2) * 100)
         return Money(rub, cent)
+
+    def __gt__(self, other):
+        self_money = self.__rub + (self.__cents / 100)
+        other_money = other.__rub + (other.__cents / 100)
+        return self_money > other_money
+
+    def __lt__(self, other):
+        self_money = self.__rub + (self.__cents / 100)
+        other_money = other.__rub + (other.__cents / 100)
+        return self_money < other_money
+
+    def __eq__(self, other):
+        self_money = self.__rub + (self.__cents / 100)
+        other_money = other.__rub + (other.__cents / 100)
+        return self_money == other_money
+
+    def __ne__(self, other):
+        self_money = self.__rub + (self.__cents / 100)
+        other_money = other.__rub + (other.__cents / 100)
+        return self_money != other_money
+
