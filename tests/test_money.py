@@ -44,10 +44,10 @@ def test_add_money(first_money, second_money, expected):
 @pytest.mark.parametrize(
     'first_money,second_money,expected',
     [
-        (Money(10, 45), Money(10, 55), '0руб 0коп'),
+        (Money(10, 45), Money(10, 55), '0руб -10коп'),
         (Money(10, 101), Money(1, 200), '8руб 1коп'),
         (Money(0, 205), Money(0, 0), '2руб 5коп'),
-        (Money(0, 0), Money(0, 205), '0руб 0коп'),
+        (Money(0, 0), Money(0, 205), '-2руб -5коп'),
     ]
 )
 def test_substract_money(first_money, second_money, expected):

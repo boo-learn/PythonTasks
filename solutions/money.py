@@ -7,14 +7,16 @@ class Money:
         self.__cents = cents
 
     def __min_cents(self) -> tuple:
-        rub_in_cents = self.__cents // 100
-        actual_cents = self.__cents % 100
+        all_money = self.__rub + (self.__cents / 100)
+        cent, rub = math.modf(all_money)
+        rub_in_cents = int(rub)
+        actual_cents = int(round(cent, 2) * 100)
 
         return rub_in_cents, actual_cents
 
     def __str__(self):
         rubs_from_cents, cents_left = self.__min_cents()
-        return f'{rubs_from_cents + self.__rub}руб {cents_left}коп'
+        return f'{rubs_from_cents}руб {cents_left}коп'
 
     def __add__(self, other):
         rub = self.__rub + other.__rub
@@ -23,8 +25,6 @@ class Money:
 
     def __sub__(self, other):
         all_money = (self.__rub + (self.__cents / 100)) - (other.__rub + (other.__cents / 100))
-        if all_money < 0:
-            return Money(0, 0)
         cent, rub = math.modf(all_money)
         rub = int(rub)
         cent = int(round(cent, 2) * 100)
@@ -58,3 +58,6 @@ class Money:
         other_money = other.__rub + (other.__cents / 100)
         return self_money != other_money
 
+money1 = Money(10, 45)
+money2 = Money(10, 55)
+print(money1)
