@@ -17,10 +17,7 @@ from solutions.money import Money
     ]
 )
 def test_str_money(money_given, expected):
-    out = StringIO()
-    sys.stdout = out
-    print(money_given)
-    assert out.getvalue().strip() == expected
+    assert str(money_given) == expected
 
 
 @pytest.mark.parametrize(
@@ -36,10 +33,7 @@ def test_str_money(money_given, expected):
 def test_add_money(first_money, second_money, expected):
     summ = first_money + second_money
     assert isinstance(summ, Money)
-    out = StringIO()
-    sys.stdout = out
-    print(summ)
-    assert out.getvalue().strip() == expected
+    assert str(summ) == expected
 
 @pytest.mark.parametrize(
     'first_money,second_money,expected',
@@ -53,10 +47,7 @@ def test_add_money(first_money, second_money, expected):
 def test_substract_money(first_money, second_money, expected):
     substraction_res = first_money - second_money
     assert isinstance(substraction_res, Money)
-    out = StringIO()
-    sys.stdout = out
-    print(substraction_res)
-    assert out.getvalue().strip() == expected
+    assert str(substraction_res) == expected
 
 @pytest.mark.parametrize(
     'first_money,num,expected',
@@ -70,10 +61,7 @@ def test_substract_money(first_money, second_money, expected):
 def test_mul_money(first_money, num, expected):
     mul = first_money * num
     assert isinstance(mul, Money)
-    out = StringIO()
-    sys.stdout = out
-    print(mul)
-    assert out.getvalue().strip() == expected
+    assert str(mul) == expected
 
 @pytest.mark.parametrize(
     'first_money,second_money,expected',
@@ -82,6 +70,7 @@ def test_mul_money(first_money, num, expected):
         (Money(10, 101), Money(1, 200), True),
         (Money(0, 205), Money(0, 0), True),
         (Money(0, 0), Money(0, 205), False),
+        (Money(2, 97), Money(0, 297), False)
     ]
 )
 def test_gt_money(first_money, second_money, expected):
@@ -95,6 +84,7 @@ def test_gt_money(first_money, second_money, expected):
         (Money(10, 101), Money(1, 200), False),
         (Money(0, 205), Money(0, 0), False),
         (Money(0, 0), Money(0, 205), True),
+        (Money(2, 97), Money(0, 297), False)
     ]
 )
 def test_lt_money(first_money, second_money, expected):
@@ -108,6 +98,7 @@ def test_lt_money(first_money, second_money, expected):
         (Money(10, 101), Money(0, 1101), True),
         (Money(0, 205), Money(2, 5), True),
         (Money(0, 0), Money(0, 205), False),
+        (Money(2, 97), Money(0, 297), True)
     ]
 )
 def test_eq_money(first_money, second_money, expected):
@@ -121,6 +112,7 @@ def test_eq_money(first_money, second_money, expected):
         (Money(10, 101), Money(0, 1101), False),
         (Money(0, 205), Money(2, 5), False),
         (Money(0, 0), Money(0, 205), True),
+        (Money(2, 97), Money(0, 297), False)
     ]
 )
 def test_ne_money(first_money, second_money, expected):

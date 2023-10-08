@@ -3,61 +3,49 @@ import math
 
 class Money:
     def __init__(self, rub: int, cents: int):
-        self.__rub = rub
-        self.__cents = cents
+        self.__cents = cents + rub * 100
 
-    def __min_cents(self) -> tuple:
-        all_money = self.__rub + (self.__cents / 100)
-        cent, rub = math.modf(all_money)
-        rub_in_cents = int(rub)
-        actual_cents = int(round(cent, 2) * 100)
+    @staticmethod
+    def __cents_and_rubs(cents) -> tuple[int, int]:
+        rub_in_cents = abs(cents) // 100
+        actual_cents = abs(cents) % 100
+        if cents < 0:
+            rub_in_cents = -rub_in_cents
+            actual_cents = -actual_cents
 
         return rub_in_cents, actual_cents
 
     def __str__(self):
-        rubs_from_cents, cents_left = self.__min_cents()
+        rubs_from_cents, cents_left = self.__cents_and_rubs(self.__cents)
         return f'{rubs_from_cents}руб {cents_left}коп'
 
     def __add__(self, other):
-        rub = self.__rub + other.__rub
-        cents = self.__cents + other.__cents
-        return Money(rub, cents)
+        summ = self.__cents + other.__cents
+        rub, cent = self.__cents_and_rubs(summ)
+        return Money(rub, cent)
 
     def __sub__(self, other):
-        all_money = (self.__rub + (self.__cents / 100)) - (other.__rub + (other.__cents / 100))
-        cent, rub = math.modf(all_money)
-        rub = int(rub)
-        cent = int(round(cent, 2) * 100)
+        subtraction = self.__cents - other.__cents
+        rub, cent = self.__cents_and_rubs(subtraction)
         return Money(rub, cent)
 
     def __mul__(self, num):
-        self_all_money = self.__rub + (self.__cents / 100)
-        money_multiply = self_all_money * num
-        cent, rub = math.modf(money_multiply)
-        rub = int(rub)
-        cent = int(round(cent, 2) * 100)
+        money_multiply = self.__cents * num
+        rub, cent = self.__cents_and_rubs(money_multiply)
         return Money(rub, cent)
 
     def __gt__(self, other):
-        self_money = self.__rub + (self.__cents / 100)
-        other_money = other.__rub + (other.__cents / 100)
-        return self_money > other_money
+        return self.__cents > other.__cents
 
     def __lt__(self, other):
-        self_money = self.__rub + (self.__cents / 100)
-        other_money = other.__rub + (other.__cents / 100)
-        return self_money < other_money
+        return self.__cents < other.__cents
 
     def __eq__(self, other):
-        self_money = self.__rub + (self.__cents / 100)
-        other_money = other.__rub + (other.__cents / 100)
-        return self_money == other_money
+        return self.__cents == other.__cents
 
     def __ne__(self, other):
-        self_money = self.__rub + (self.__cents / 100)
-        other_money = other.__rub + (other.__cents / 100)
-        return self_money != other_money
+        return self.__cents != other.__cents
 
 money1 = Money(10, 45)
 money2 = Money(10, 55)
-print(money1)
+print(money1 - money2)
