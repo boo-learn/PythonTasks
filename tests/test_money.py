@@ -17,10 +17,7 @@ from solutions.money import Money
     ]
 )
 def test_str_money(money_given, expected):
-    out = StringIO()
-    sys.stdout = out
-    print(money_given)
-    assert out.getvalue().strip() == expected
+    assert str(money_given) == expected
 
 
 @pytest.mark.parametrize(
