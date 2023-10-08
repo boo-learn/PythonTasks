@@ -18,38 +18,30 @@ class Money:
 
     def __add__(self, other):
         summ = self.__cents + other.__cents
-        rub, cent = summ.__min_cents()
+        rub, cent = self.__cents_and_rubs(summ)
         return Money(rub, cent)
 
     def __sub__(self, other):
         substraction = self.__cents - other.__cents
-        rub, cent = substraction.__min_cents()
+        rub, cent = self.__cents_and_rubs(substraction)
         return Money(rub, cent)
 
     def __mul__(self, num):
         money_multiply = self.__cents * num
-        rub, cent = money_multiply.__min_cents
+        rub, cent = self.__cents_and_rubs(money_multiply)
         return Money(rub, cent)
 
     def __gt__(self, other):
-        self_money = self.__rub + (self.__cents / 100)
-        other_money = other.__rub + (other.__cents / 100)
-        return self_money > other_money
+        return self.__cents > other.__cents
 
     def __lt__(self, other):
-        self_money = self.__rub + (self.__cents / 100)
-        other_money = other.__rub + (other.__cents / 100)
-        return self_money < other_money
+        return self.__cents < other.__cents
 
     def __eq__(self, other):
-        self_money = self.__rub + (self.__cents / 100)
-        other_money = other.__rub + (other.__cents / 100)
-        return self_money == other_money
+        return self.__cents == other.__cents
 
     def __ne__(self, other):
-        self_money = self.__rub + (self.__cents / 100)
-        other_money = other.__rub + (other.__cents / 100)
-        return self_money != other_money
+        return self.__cents != other.__cents
 
 money1 = Money(10, 45)
 money2 = Money(10, 55)
