@@ -14,11 +14,12 @@ class Car:
 
         self.__gas += liters
 
-    def ride(self, milage: int) -> None:
+    def ride(self, distance: int) -> None:
         max_distance = int(self.__gas / self.__gas_per_km)
-        if milage > max_distance:
+        if distance > max_distance:
             self.__gas = 0
             self.milage += max_distance
+            print(f'Out of gas. {distance - max_distance}km left to go.')
 
-        self.__gas -= self.__gas_per_km * milage
-        self.milage += milage
+        self.__gas -= self.__gas_per_km * distance
+        self.milage += distance
