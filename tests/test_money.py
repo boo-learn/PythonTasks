@@ -70,6 +70,7 @@ def test_mul_money(first_money, num, expected):
         (Money(10, 101), Money(1, 200), True),
         (Money(0, 205), Money(0, 0), True),
         (Money(0, 0), Money(0, 205), False),
+        (Money(2, 97), Money(0, 297), False)
     ]
 )
 def test_gt_money(first_money, second_money, expected):
@@ -83,6 +84,7 @@ def test_gt_money(first_money, second_money, expected):
         (Money(10, 101), Money(1, 200), False),
         (Money(0, 205), Money(0, 0), False),
         (Money(0, 0), Money(0, 205), True),
+        (Money(2, 97), Money(0, 297), False)
     ]
 )
 def test_lt_money(first_money, second_money, expected):
@@ -96,6 +98,7 @@ def test_lt_money(first_money, second_money, expected):
         (Money(10, 101), Money(0, 1101), True),
         (Money(0, 205), Money(2, 5), True),
         (Money(0, 0), Money(0, 205), False),
+        (Money(2, 97), Money(0, 297), True)
     ]
 )
 def test_eq_money(first_money, second_money, expected):
@@ -109,6 +112,7 @@ def test_eq_money(first_money, second_money, expected):
         (Money(10, 101), Money(0, 1101), False),
         (Money(0, 205), Money(2, 5), False),
         (Money(0, 0), Money(0, 205), True),
+        (Money(2, 97), Money(0, 297), False)
     ]
 )
 def test_ne_money(first_money, second_money, expected):
