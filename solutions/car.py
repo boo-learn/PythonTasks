@@ -22,6 +22,6 @@ class Car:
             self.gas = 0
             self.milage += max_distance
             print(f'Out of gas. {distance - max_distance}km left to go.')
-
-        self.gas -= self.gas_per_km * distance
-        self.milage += distance
+        else:
+            self.milage += distance
+            self.gas -= distance * self.gas_per_km
