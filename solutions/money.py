@@ -7,8 +7,11 @@ class Money:
 
     @staticmethod
     def __cents_and_rubs(cents) -> tuple[int, int]:
-        rub_in_cents = cents // 100
-        actual_cents = cents % 100
+        rub_in_cents = abs(cents) // 100
+        actual_cents = abs(cents) % 100
+        if cents < 0:
+            rub_in_cents = -rub_in_cents
+            actual_cents = -actual_cents
 
         return rub_in_cents, actual_cents
 
@@ -22,8 +25,8 @@ class Money:
         return Money(rub, cent)
 
     def __sub__(self, other):
-        substraction = self.__cents - other.__cents
-        rub, cent = self.__cents_and_rubs(substraction)
+        subtraction = self.__cents - other.__cents
+        rub, cent = self.__cents_and_rubs(subtraction)
         return Money(rub, cent)
 
     def __mul__(self, num):
@@ -45,4 +48,4 @@ class Money:
 
 money1 = Money(10, 45)
 money2 = Money(10, 55)
-print(money1)
+print(money1 - money2)
