@@ -3,14 +3,11 @@ import math
 
 class Money:
     def __init__(self, rub: int, cents: int):
-        self.__rub = rub
-        self.__cents = cents
+        self.__cents = cents + rub * 100
 
     def __min_cents(self) -> tuple:
-        all_money = self.__rub + (self.__cents / 100)
-        cent, rub = math.modf(all_money)
-        rub_in_cents = int(rub)
-        actual_cents = int(round(cent, 2) * 100)
+        rub_in_cents = self.__cents // 100
+        actual_cents = self.__cents % 100
 
         return rub_in_cents, actual_cents
 
