@@ -33,10 +33,7 @@ def test_str_money(money_given, expected):
 def test_add_money(first_money, second_money, expected):
     summ = first_money + second_money
     assert isinstance(summ, Money)
-    out = StringIO()
-    sys.stdout = out
-    print(summ)
-    assert out.getvalue().strip() == expected
+    assert str(summ) == expected
 
 @pytest.mark.parametrize(
     'first_money,second_money,expected',
@@ -50,10 +47,7 @@ def test_add_money(first_money, second_money, expected):
 def test_substract_money(first_money, second_money, expected):
     substraction_res = first_money - second_money
     assert isinstance(substraction_res, Money)
-    out = StringIO()
-    sys.stdout = out
-    print(substraction_res)
-    assert out.getvalue().strip() == expected
+    assert str(substraction_res) == expected
 
 @pytest.mark.parametrize(
     'first_money,num,expected',
@@ -67,10 +61,7 @@ def test_substract_money(first_money, second_money, expected):
 def test_mul_money(first_money, num, expected):
     mul = first_money * num
     assert isinstance(mul, Money)
-    out = StringIO()
-    sys.stdout = out
-    print(mul)
-    assert out.getvalue().strip() == expected
+    assert str(mul) == expected
 
 @pytest.mark.parametrize(
     'first_money,second_money,expected',
