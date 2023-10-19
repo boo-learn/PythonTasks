@@ -1,14 +1,15 @@
-def count_prizes(prizes: list) -> int:
-    counter = 0
-    for prize in prizes:
-        if prize <= 3:
-            counter += 1
+points = [10, 1, 3, 4, 3, 5, 6, 7, 7, 6, 1, 10]
 
-    return counter
+points.sort(reverse=True)
 
+count = 0
+places_switch = 0
 
-olympic_results = [int(x) for x in input().split()]
-winner_num = count_prizes(olympic_results)
-print(winner_num)
+for index, point in enumerate(points):
+    count += 1
+    if point != points[index + 1]:
+        places_switch += 1
+    if places_switch > 2:
+        break
 
-# возможно не понял условие
+print(count)
