@@ -1,29 +1,43 @@
+from enum import Enum
+
+
+class Mistakes(Enum):
+    container_empty = 1
+    container_full = 2
+    barge_not_empty = 3
+    wrong_barrel_type = 4
+
+
 class Barge:
     def __init__(self, container_quantity: int):
-        self.containers = {i: [] for i in range(container_quantity)}
-        self.mistakes = []
+        self.__containers = {i: [] for i in range(container_quantity)}
+        self.__mistakes = []
 
-    def add_barrel(self, container: int, barrel: str) -> None:
-        container = self.containers[container]
-        if len(container) > 10:
-            self.mistakes.append('Container full')
+    def __get_mistakes(self) -> list[Mistakes]:
+        return self.__mistakes
+
+    def add_barrel(self, container_num: int, barrel_type: str) -> None:
+        container = self.__containers[container_num]
+        if len(container) > 9:
+            self.__mistakes.append(Mistakes.container_full)
         else:
-            container.append(barrel)
+            container.append(barrel_type)
 
-    def remove_barrel(self, container: int) -> str:
-        container = self.containers[container]
+    def remove_barrel(self, container_num: int, barrel_type: str) -> None:
+        container = self.__containers[container_num]
         if not container:
-            self.mistakes.append('Container empty')
+            self.__mistakes.append(Mistakes.container_empty)
         else:
-            barrel = container.pop()
-            return barrel
+            removed_barrel_type = container.pop()
+            if removed_barrel_type != barrel_type:
+                self.__mistakes.append(Mistakes.wrong_barrel_type)
 
     def check_empty(self):
-        all_containers = self.containers.values()
+        all_containers = self.__containers.values()
         for container in all_containers:
             if container:
-                self.mistakes.append('Barge is still loaded')
+                self.__mistakes.append(Mistakes.barge_not_empty)
+                break
 
     def check_mistakes(self):
-        if self.mistakes:
-            print(self.mistakes)
+        return bool(self.__mistakes)
